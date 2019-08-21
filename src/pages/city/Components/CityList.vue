@@ -5,21 +5,29 @@
                 <div class='title border-topbottom'>当前城市</div>
                 <div class='button-list'>
                     <div class='button-warpper'>
-                        <div class='button'>北京</div>
+                        <div class='button'>{{this.$store.state.city}}</div>
                     </div>
                 </div>
             </div>
             <div class='area'>
                 <div class='title border-topbottom'>热门城市</div>
                 <div class='button-list'>
-                    <div class='button-warpper' v-for='item in hot' :key='item.id' >
+                    <div class='button-warpper' 
+                        v-for='item in hot' 
+                        :key='item.id' 
+                        @click='handleChangeCity(item.name)'
+                    >
                         <div class='button'>{{item.name}}</div>
                     </div>
                 </div>
             </div>
             <div class='area' v-for='(item,key) in cities' :key='key' :ref='key' id='key'>
                 <div class='title border-topbottom' >{{key}}</div> 
-                <div class='item-list' v-for='innerItem in item' :key='innerItem.id'>
+                <div class='item-list' 
+                    v-for='innerItem in item' 
+                    :key='innerItem.id'
+                    @click='handleChangeCity(innerItem.name)'
+                >
                     <div class='item border-bottom'>{{innerItem.name}}</div>
                 </div>
             </div>
@@ -41,9 +49,6 @@ export default {
         cities:Object,
         letter:String,
     },
-    mounted(){
-        this.scroll= new BScroll(this.$refs.wrapper)
-    },
     watch:{
         letter(){
             if (this.letter){
@@ -51,6 +56,15 @@ export default {
                 this.scroll.scrollToElement(element)
             }
         }
+    },
+    methods:{
+        handleChangeCity(city){
+            this.$store.commit('changeCity',city)
+            this.$router.push('/')
+        }
+    },
+    mounted(){
+        this.scroll= new BScroll(this.$refs.wrapper)
     },
 }
 </script>

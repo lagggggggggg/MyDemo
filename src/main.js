@@ -7,6 +7,7 @@ import 'swiper/dist/css/swiper.css'
 import 'styles/reset.css'
 import 'styles/border.css'
 import 'styles/iconfont.css'
+import store from './store/store'
 
 Vue.config.productionTip = false
 if ('addEventListener' in document) {
@@ -18,5 +19,6 @@ Vue.use(VueAwesomeSwiper)
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

@@ -9,8 +9,8 @@
       </div>
       <router-link to='/city'>
         <div class='header-right'>
-            {{this.city}}
-            <span class='iconfont icon-arrow'>&#xe62d;</span>  
+                <div class='header-city'>{{this.$store.state.city}}</div>
+                <span class='iconfont icon-arrow'>&#xe62d;</span>  
         </div>
       </router-link>
   </div>
@@ -30,11 +30,14 @@ export default {
 
 <style lang="stylus" scoped>
 @import '~styles/varibles.styl'
+@import '~styles/mixin'
 .header
     background:$bgColor
     display:flex;
     line-height:$headerHeight;
     color:#fff;
+    height:.88rem;
+    width:100%;
     .header-left
         width:.64rem;
         float:left;
@@ -52,11 +55,18 @@ export default {
         background:#fff
         color:gray;
     .header-right
+        display:flex;
         float:right;
+        margin-left:.1rem;
         width:1.24rem;
         text-align :center;
         color:#fff
         .icon-arrow
             font-size:.24rem
             margin-left:-.04rem
+            margin-right:.12rem
+        .header-city
+            flex:1;
+            ellipsis()
+
 </style>
