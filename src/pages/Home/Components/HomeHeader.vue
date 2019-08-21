@@ -9,7 +9,7 @@
       </div>
       <router-link to='/city'>
         <div class='header-right'>
-                <div class='header-city'>{{this.$store.state.city}}</div>
+                {{this.city}}
                 <span class='iconfont icon-arrow'>&#xe62d;</span>  
         </div>
       </router-link>
@@ -17,27 +17,27 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     data(){
         return {
         }
     },
-    props:{
-        city:String
-    },
+    computed:{
+        ...mapState(['city'])
+    }
+
 }
 </script>
 
 <style lang="stylus" scoped>
 @import '~styles/varibles.styl'
-@import '~styles/mixin'
 .header
     background:$bgColor
     display:flex;
     line-height:$headerHeight;
     color:#fff;
-    height:.88rem;
-    width:100%;
     .header-left
         width:.64rem;
         float:left;
@@ -48,25 +48,20 @@ export default {
         flex:1;
         height .64rem
         line-height :.64rem
-        padding-left:.1rem
+        padding-left:.2rem
         margin-top:.12rem
-        margin-left:.12rem
+        margin-left:.2rem
         border-radius:0.1rem;
         background:#fff
         color:gray;
     .header-right
-        display:flex;
         float:right;
-        margin-left:.1rem;
-        width:1.24rem;
+        padding:0 .1rem
+        min-width:1.04rem;
         text-align :center;
         color:#fff
         .icon-arrow
             font-size:.24rem
             margin-left:-.04rem
-            margin-right:.12rem
-        .header-city
-            flex:1;
-            ellipsis()
 
 </style>
