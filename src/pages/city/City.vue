@@ -3,7 +3,7 @@
         <city-header></city-header>
         <city-search :cities='cities'></city-search>
         <city-list :hot='hotCities' :cities='cities' :letter='letter'></city-list>
-        <city-alphabet :cities='cities' @change='handleChange' :target='target'></city-alphabet>
+        <city-alphabet :cities='cities' @change='handleChange' ></city-alphabet>
     </div>
 </template>
 
@@ -46,9 +46,6 @@ export default {
         handleChange (letter) {
             this.letter = letter
         },
-        handleBgChange(target){
-            this.target=target;
-        }
     }
 }
 </script>
