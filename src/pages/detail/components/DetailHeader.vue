@@ -80,6 +80,7 @@ export default {
         color:#fff;
         font-weight: bold;
 .header-detail-fixed
+    z-index:2
     position:fixed
     top:0;
     right:0;
