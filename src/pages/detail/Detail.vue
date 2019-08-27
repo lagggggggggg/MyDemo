@@ -1,6 +1,6 @@
 <template>
     <div>
-        <detail-banner></detail-banner>
+        <detail-banner :sightName='sightName' :bannerImg='bannerImg' :gallaryImgs='gallaryImgs'></detail-banner>
         <detail-header></detail-header>
         <detail-list :list='list'></detail-list>
     </div>
@@ -10,72 +10,40 @@
 import DetailBanner from './components/DetailBanner'
 import DetailHeader from './components/DetailHeader'
 import DetailList from './components/DetailList'
+import axios from 'axios'
 
 export default {
     name:'detail',
     data(){
         return{
-            list:[{
-                title:'故宫预售成人票',
-                children:[{
-                    title:'上午场',
-                    price:'60'
-                },{
-                    title:'下午场',
-                    price:'60'
-                },{
-                    title:'故宫+珍宝馆+钟表馆',
-                    price:'80'
-                },{
-                    title:'故宫+钟表馆',
-                    price:'70'
-                },{
-                    title:'故宫+珍宝馆',
-                    price:'70'
-                },]
-            },{
-                title:'故宫预售学生票',
-                children:[{
-                    title:'上午场',
-                    price:'20'
-                },{
-                    title:'下午场',
-                    price:'20'
-                },{
-                    title:'故宫+珍宝馆+钟表馆',
-                    price:'30'
-                },{
-                    title:'故宫+钟表馆',
-                    price:'25'
-                },{
-                    title:'故宫+珍宝馆',
-                    price:'25'
-                },]
-            },{
-                title:'故宫预售老年票',
-                children:[{
-                    title:'上午场',
-                    price:'30'
-                },{
-                    title:'下午场',
-                    price:'30'
-                },{
-                    title:'故宫+珍宝馆+钟表馆',
-                    price:'40'
-                },{
-                    title:'故宫+钟表馆',
-                    price:'35'
-                },{
-                    title:'故宫+珍宝馆',
-                    price:'35'
-                },]
-            }]
+            list:[],
+            sightName:'',
+            bannerImg:'',
+            gallaryImgs:[],
         }
     },
     components:{
         DetailBanner,
         DetailHeader,
         DetailList,
+    },
+    methods:{
+        handleGetDetailInfo(){
+            axios.get("/api/detail.json?id="+this.$route.params.id).then(this.handleGetDataSucc)
+        },
+        handleGetDataSucc(response){
+            let res = response.data
+            if (res.ret && res.data){
+                let data = res.data
+                this.list = data.categoryList
+                this.sightName = data.sightName
+                this.bannerImg = data.bannerImg
+                this.gallaryImgs = data.gallaryImgs
+            }
+        }
+    },
+    mounted(){
+        this.handleGetDetailInfo()
     }
 }
 </script>

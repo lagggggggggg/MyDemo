@@ -1,21 +1,15 @@
 <template>
     <div >
-        <router-link tag='div' to='/'>
-            <div class='back'>
-                <div class='back-bg'></div>
-                <div class='iconfont icon-back'>&#xe624;</div>
-            </div>
-        </router-link>
         <div class='banner' @click='handleChangeGallaryShow'>
             <img class='banner-img' 
-            src='//img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_600x330_f922b488.jpg' 
+            :src='bannerImg' 
             />
             <div class='banner-info'>
-                <div class='banner-title'>故宫(AAAAA级景区)</div>
-                <div class='banner-number'><span class='iconfont banner-icon'>&#xe796;</span>12</div>
+                <div class='banner-title'>{{this.sightName}}</div>
+                <div class='banner-number'><span class='iconfont banner-icon'>&#xe796;</span>{{this.gallaryImgs.length}}</div>
             </div>
         </div>
-        <Gallary :imgs='imgs' v-show='showGallary' @handleGallaryClose='closeGallary'></Gallary>
+        <Gallary :imgs='gallaryImgs' v-show='showGallary' @handleGallaryClose='closeGallary'></Gallary>
     </div>
 </template>
 
@@ -27,9 +21,12 @@ export default {
     data(){
         return{
             showGallary:false,
-            imgs:['http://img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_350x240_8e61302a.jpg','http://img1.qunarzz.com/sight/p0/1907/ca/ca68bd95bc36bdba3.img.jpg_350x240_0d9e7931.jpg',
-            'http://img1.qunarzz.com/sight/p0/1410/e3/73da8d3e19cdc41c1932d4fcd22ec792.water.jpg_350x240_af846382.jpg','http://img1.qunarzz.com/sight/p0/1410/9d/fe8109ab5df1c9c324e74284fa802e72.water.jpg_350x240_8571d9ed.jpg']
         }
+    },
+    props:{
+        sightName:String,
+        bannerImg:String,
+        gallaryImgs:Array,
     },
     components:{
         Gallary,
@@ -46,34 +43,6 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.back
-    position: absolute;
-    z-index:1;
-    left: .1rem;
-    top: .1rem;
-    width: .72rem;
-    height: .72rem;
-    line-height: .72rem;
-    .back-bg
-        display: block;
-        width: .72rem;
-        height: .72rem;
-        background-color: #000;
-        opacity: .5;
-        -webkit-border-radius: .36rem;
-        -moz-border-radius: .36rem;
-        border-radius: .36rem;
-    .icon-back
-        position: absolute;
-        left: -.02rem;
-        top: 0;
-        display: block;
-        width: .72rem;
-        line-height: .72rem;
-        text-align: left;
-        text-indent: .24rem;
-        color:#fff;
-        font-weight: bold;
 .banner
     position:relative
     overflow:hidden;
